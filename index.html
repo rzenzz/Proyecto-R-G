@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web Final</title>
+    
+    <script>
+        // La contraseña que el usuario debe ingresar (PUEDES CAMBIAR "verde")
+        var contrasenaCorrecta = "416"; 
+        
+        // Solicita la contraseña al usuario
+        var contrasenaIngresada = prompt("INGRESA LA CONTRASEÑA para acceder a la página:");
+
+        // Bucle que se repite hasta que la contraseña sea correcta
+        while (contrasenaIngresada !== contrasenaCorrecta) {
+            if (contrasenaIngresada === null) {
+                // Si el usuario presiona Cancelar, lo redirige a Google.
+                window.location.href = "https://www.youtube.com/watch?v=iik25wqIuFo&list=RDiik25wqIuFo&start_radio=1"; 
+                break; 
+            }
+            contrasenaIngresada = prompt("Contraseña incorrecta. Inténtalo de nuevo:");
+        }
+    </script>
+    
+    <style>
+    /* Pantalla de Carga */
+    #pantalla-carga {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #388E3C; /* Fondo verde oscuro para la carga */
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5em;
+        font-weight: bold;
+        z-index: 9999; /* Asegura que esté por encima de todo */
+        transition: opacity 10.0s ease; /* Transición suave de desaparición */
+    }
+    
+    /* Estilos Generales y Fondo DEGRADADO Rosa/Azul */
+    body {
+        background-image: linear-gradient(to bottom right, #F8BBD0, #ADD8E6); /* Degradado: Rosa a Azul */
+        background-attachment: fixed; /* Para que el degradado se mantenga fijo al hacer scroll */
+        color: #333;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        min-height: 100vh;
+    }
+
+    h1 {
+        color: #333; 
+        margin-top: 20px;
+    }
+
+    /* --- ESTILOS DEL MENÚ HAMBURGUESA (NUEVO) --- */
+    
+    /* Botón de las 3 rayitas */
+    #boton-menu {
+        position: fixed;
+        top: 50px;
+        left: 5px;
+        z-index: 1000;
+        cursor: pointer;
+        font-size: 30px;
+        color: white;
+        background-color: #E91E63; /* Fondo rosa intenso */
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s;
+    }
+
+    #boton-menu:hover {
+        background-color: #AD1457;
+    }
+
+    /* Panel Lateral del Menú */
+    #menu-lateral {
+        height: 100%; 
+        width: 0; /* Inicialmente cerrado */
+        position: fixed; 
+        z-index: 900; 
+        top: 0;
+        left: 0;
+        background-color: #388E3C; /* Fondo verde oscuro */
+        overflow-x: hidden; 
+        transition: 0.5s; /* Animación de apertura */
+        padding-top: 60px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Enlaces dentro del menú */
+    #menu-lateral a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #FFEB3B; /* Amarillo para los enlaces */
+        display: block;
+        transition: 0.3s;
+        white-space: nowrap;
+    }
+
+    #menu-lateral a:hover {
+        color: white;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* Botón de cierre (la X) */
+    .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px !important;
+        margin-left: 50px;
+    }
+    
+    /* --- FIN ESTILOS DEL MENÚ HAMBURGUESA --- */
+
+
+    /* Marquesina Deslizante (Izquierda a Derecha) */
+    .contenedor-movimiento {
+        overflow: hidden; 
+        width: 100%; 
+        background-color: #ADD8E6; 
+        padding: 10px 0;
+        white-space: nowrap;
+        margin-bottom: 20px;
+    }
+
+    .texto-deslizante {
+        display: inline-block;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #E91E63; 
+        animation: deslizar-a-la-derecha 10s linear infinite; 
+    }
+
+    @keyframes deslizar-a-la-derecha {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* Galería (12 Cuadros) */
+    .galeria-contenedor {
+        width: 90%;
+        max-width: 1000px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 15px; 
+        margin-bottom: 40px;
+    }
+
+    .cuadro {
+        display: block; 
+        border: 2px solid #ddd;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-decoration: none; 
+        transition: transform 0.2s;
+    }
+    
+    .cuadro:hover {
+        transform: scale(1.05);
+        border-color: #E91E63; 
+    }
+
+    .cuadro img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    /* Estilos de los Botones (Degradado Rosa/Azul) */
+    .boton-musica {
+        background-image: linear-gradient(to right, #F8BBD0, #ADD8E6);
+        color: #333; 
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 25px; 
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-image 0.3s ease, transform 0.2s ease;
+    }
+
+    .boton-musica:hover {
+        background-image: linear-gradient(to right, #E91E63, #2196F3);
+        transform: translateY(-2px); 
+    }
+
+    .boton-musica:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+</style>
+</head>
+<body>
+
+    <div id="menu-lateral">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">&times;</a>
+        
+        <a href="index.html">Página Principal</a>
+        <a href="https://open.spotify.com/intl-es/track/6VsvKPJ4xjVNKpI8VVZ3SV?si=f7373661034544aa" target="_blank">invisible STRING</a>
+        <a href="https://www.instagram.com/griss3779/" target="_blank">Una niña hermosa la cual amo demasiadoo</a>
+    </div>
+
+    <button id="boton-menu" onclick="toggleMenu()">
+        &#9776;
+    </button>
+    
+    <div id="pantalla-carga">
+        Cargando...
+    </div>
+
+    <audio id="musica-fondo" src="file:///C:/Users/carlo/Downloads/13934.m4a" autoplay loop hidden></audio>
+
+    <div class="contenedor-movimiento">
+        <div class="texto-deslizante">
+            ¡BIENVENIDA A TU PAGINA DE TAYLOR SWIFT AMORR.
+        </div>
+    </div>
+
+    <h1>HAZ CLICK EN ORDEN CRONOLOGICO</h1>
+
+    <div class="galeria-contenedor">
+        
+        <a href="file:///C:/PROYECTO/p1.html" class="cuadro" target="_blank">
+            <img src="file:///C:/PROYECTO/1.webp" alt="Imagen 1">
+        </a>
+        <a href="file:///C:/PROYECTO/p2.html" class="cuadro" target="_blank">
+            <img src="file:///C:/PROYECTO/2.webp" alt="Imagen 2">
+        </a>
+        <a href="file:///C:/PROYECTO/p3.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/3.webp" alt="Imagen 3"></a>
+        <a href="file:///C:/PROYECTO/p4.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/4.webp" alt="Imagen 4"></a>
+        <a href="file:///C:/PROYECTO/p5.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/5.webp" alt="Imagen 5"></a>
+        <a href="file:///C:/PROYECTO/p6.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/6.webp" alt="Imagen 6"></a>
+        <a href="file:///C:/PROYECTO/p7.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/7.webp" alt="Imagen 7"></a>
+        <a href="file:///C:/PROYECTO/p8.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/8.webp" alt="Imagen 8"></a>
+        <a href="file:///C:/PROYECTO/p9.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/9.webp" alt="Imagen 9"></a>
+        <a href="file:///C:/PROYECTO/p10.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/10.webp" alt="Imagen 10"></a>
+        <a href="file:///C:/PROYECTO/p11.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/11.webp" alt="Imagen 11"></a>
+        <a href="file:///C:/PROYECTO/p12.html" class="cuadro" target="_blank"><img src="file:///C:/PROYECTO/12.jpg" alt="Imagen 12"></a>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <button onclick="document.getElementById('musica-fondo').pause()" class="boton-musica">Pausar Música</button>
+        <button onclick="document.getElementById('musica-fondo').play()" class="boton-musica">Reproducir Música</button>
+    </div>
+
+    <script>
+        // FUNCIÓN DEL MENÚ HAMBURGUESA (NUEVO)
+        function toggleMenu() {
+            var menu = document.getElementById("menu-lateral");
+            // Si el menú está cerrado (width=0), lo abre a 250px
+            if (menu.style.width === "250px") {
+                menu.style.width = "0";
+            } else {
+                menu.style.width = "250px";
+            }
+        }
+        
+        // FUNCIÓN DE LA PANTALLA DE CARGA
+        window.onload = function() {
+            var carga = document.getElementById('pantalla-carga');
+            
+            // Inicia la transición de desvanecimiento (opacidad a 0)
+            carga.style.opacity = '0'; 
+            
+            // Oculta el elemento por completo después de la animación (900 milisegundos)
+            setTimeout(function() {
+                carga.style.display = 'none';
+            }, 900); 
+        };
+    </script>
+
+</body>
+</html>

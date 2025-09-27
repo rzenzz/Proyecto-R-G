@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen 1 | Detalle</title>
+    <style>
+        /* Estilos para cubrir toda la pantalla */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: black; /* Fondo negro por si la imagen no carga */
+        }
+
+        .imagen-pantalla-completa {
+            /* Fija la imagen y la estira */
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw; 
+            height: 100vh; 
+            object-fit: contain; /* Ajusta la imagen completa sin recortar (con barras negras si es necesario) */
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="file:///C:/Users/carlo/Downloads/Historia%20de%20instagram%20frase%20positiva%20acuarela%20lila%20y%20blanco%20(11).jpg" alt="Imagen en detalle" class="imagen-pantalla-completa">
+
+    <a href="index.html" style="position: fixed; top: 20px; right: 20px; color: white; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; text-decoration: none; z-index: 10;">
+        VOLVER
+    </a>
+
+</body>
+</html>
